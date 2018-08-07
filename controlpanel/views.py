@@ -4,20 +4,18 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
 def controlpanel_login(request, template_name='controlpanel/login.html'):
-    username = request.POST.get('usrname', False)
-    password = request.POST.get('psw', False)
-    user = authenticate(username=username, password=password)    
-    if user is not None:
-        print(user.username)
-        if user.is_active:
-            login(request, user)            
-            return redirect('controlpanel_home') #return render(request, 'controlpanel/home.html')
+    if request.method == 'POST': 
+        username = request.POST.get('usrname', False)
+        password = request.POST.get('psw', False)
+        user = authenticate(username=username, password=password)    
+        if user is not None:
+            if user.is_active:
+                login(request, user)            
+                return redirect('controlpanel_home')
         else:
-            print('disabled account')
-            return render(request, template_name, {'error': 'disabled account'})            
+            return render(request, template_name, {'error': 'something went wrong. try again !'})            
     else:
-        print('invalid login')
-        return render(request, template_name, {'error': 'invalid login'})
+        return render(request, template_name)
 
 @login_required
 def controlpanel_home(request):

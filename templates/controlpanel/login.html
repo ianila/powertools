@@ -8,6 +8,10 @@
     <div class=" w3-card-4" style="width:30%;margin:0 auto;">
         <div class="w3-center">
             <h2 class="w3-panel w3-red w3-border-bottom w3-padding-16">Control Panel Login</h2>
+
+            {% if error %}
+                <h4 class="w3-text-red">{{ error }}</h4>
+            {% endif %}
             <img src="../../static/icons/avatar.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
         </div>   
 
