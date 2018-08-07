@@ -16,6 +16,9 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from controlpanel import views as controlpanel_views
+
 urlpatterns = [
+    url(r'^controlpanel/login/', controlpanel_views.controlpanel_login, name='controlpanel_login'),
     url(r'^admin/', admin.site.urls),
 ]
