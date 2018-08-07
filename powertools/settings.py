@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'controlpanel',
 	'tools',
+    'users'
 ]
 
 MIDDLEWARE = [
