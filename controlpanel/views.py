@@ -9,9 +9,11 @@ def controlpanel_login(request, template_name='controlpanel/login.html'):
         password = request.POST.get('psw', False)
         user = authenticate(username=username, password=password)    
         if user is not None:
-            if user.is_active:
+            if not user.profile.role == 'CUSTOMER':
                 login(request, user)            
                 return redirect('controlpanel_home')
+            else:
+                return render(request, template_name, {'error': 'you do not have permission to login'}) 
         else:
             return render(request, template_name, {'error': 'something went wrong. try again !'})            
     else:
