@@ -21,11 +21,13 @@ def controlpanel_login(request, template_name='controlpanel/login.html'):
 
 @login_required
 def controlpanel_home(request):
-    return render(request, 'controlpanel/home.html')
+    highlight = {'home': 'w3-blue'}
+    return render(request, 'controlpanel/home.html', {'highlight': highlight})
 
 @login_required
 def controlpanel_tools(request):
-    return render(request, 'controlpanel/tools.html')
+    highlight = {'tools': 'w3-blue'}
+    return render(request, 'controlpanel/tools.html', {'highlight': highlight})
 
 @login_required
 def controlpanel_logout(request):
