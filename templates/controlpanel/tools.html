@@ -14,9 +14,9 @@
 {% for tool in tools %}
 
     <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <img src="../../static/icons/tools.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-        <span class="w3-right w3-opacity">Last rent - {{ tool.last_rentered }}</span>
-        <h4>{{ tool.make }}, {{ tool.serialno }}</h4><br>
+        <img src="../../static/icons/tools.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">        
+        <h4>{{ tool.make }}, {{ tool.serialno }}</h4>
+        <div class="w3-left w3-opacity">Last rent - {{ tool.last_rentered }}</div><br>
         <hr class="w3-clear">
         <img src="../../static/images/tools.jpeg" style="width:20%" class="w3-margin-bottom">
         <p>{{ tool.desc }}</p>
