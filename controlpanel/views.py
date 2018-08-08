@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
+from tools.models import Tool
+
 def controlpanel_login(request, template_name='controlpanel/login.html'):
     if request.method == 'POST': 
         username = request.POST.get('usrname', False)
@@ -20,14 +22,17 @@ def controlpanel_login(request, template_name='controlpanel/login.html'):
         return render(request, template_name)
 
 @login_required
-def controlpanel_home(request):
-    highlight = {'home': 'w3-blue'}
-    return render(request, 'controlpanel/home.html', {'highlight': highlight})
+def controlpanel_home(request):    
+    notools = Tool.objects.count()
+
+    details = {'home': 'w3-blue'}
+    details['notools'] = notools
+    return render(request, 'controlpanel/home.html', {'details': details})
 
 @login_required
 def controlpanel_tools(request):
-    highlight = {'tools': 'w3-blue'}
-    return render(request, 'controlpanel/tools.html', {'highlight': highlight})
+    details = {'tools': 'w3-blue'}
+    return render(request, 'controlpanel/tools.html', {'details': details})
 
 @login_required
 def controlpanel_logout(request):
