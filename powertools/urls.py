@@ -20,6 +20,7 @@ from controlpanel import views as controlpanel_views
 
 urlpatterns = [
     url(r'^controlpanel/login/', controlpanel_views.controlpanel_login, name='controlpanel_login'),
+    url(r'^controlpanel/logout/', controlpanel_views.controlpanel_logout, name='controlpanel_logout'),
     url(r'^controlpanel/home/', controlpanel_views.controlpanel_home, name='controlpanel_home'),
     url(r'^admin/', admin.site.urls),
 ]

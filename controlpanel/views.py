@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 def controlpanel_login(request, template_name='controlpanel/login.html'):
@@ -22,3 +22,8 @@ def controlpanel_login(request, template_name='controlpanel/login.html'):
 @login_required
 def controlpanel_home(request):
     return render(request, 'controlpanel/home.html')
+
+@login_required
+def controlpanel_logout(request):
+    logout(request)
+    return redirect('controlpanel_login')
