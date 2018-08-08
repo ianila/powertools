@@ -24,6 +24,10 @@ def controlpanel_home(request):
     return render(request, 'controlpanel/home.html')
 
 @login_required
+def controlpanel_tools(request):
+    return render(request, 'controlpanel/tools.html')
+
+@login_required
 def controlpanel_logout(request):
     logout(request)
     return redirect('controlpanel_login')
