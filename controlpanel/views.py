@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from tools.models import Tool
+from users.models import Profile
 
 def controlpanel_login(request, template_name='controlpanel/login.html'):
     if request.method == 'POST': 
@@ -24,9 +25,11 @@ def controlpanel_login(request, template_name='controlpanel/login.html'):
 @login_required
 def controlpanel_home(request):    
     notools = Tool.objects.count()
+    noprofiles = Profile.objects.count()
 
     details = {'home': 'w3-blue'}
     details['notools'] = notools
+    details['noprofiles'] = noprofiles
     return render(request, 'controlpanel/home.html', {'details': details})
 
 @login_required
