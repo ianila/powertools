@@ -5,3 +5,6 @@ class Tool(models.Model):
     last_rentered = models.DateTimeField(blank=False, null=False)
     make = models.CharField(max_length=16, blank=False, null=False)
     desc = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.serialno, self.make
