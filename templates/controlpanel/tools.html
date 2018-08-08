@@ -9,15 +9,27 @@
     <h5><b><i class="fa fa-dashboard"></i> Power Tools Control Panel - Tools</b></h5>
   </header>
 
-<table class="w3-table w3-striped w3-white">
-          <tr>
-            <td><i class="fa fa-gear w3-text-blue w3-large"></i></td>
-            <td>Toshiba heavy tool</td>
-            <td><i>10 mins</i></td>
-          </tr>
-         
-</table>
+<div class="w3-container">
 
+{% for tool in tools %}
+
+    <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+        <img src="../../static/icons/tools.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+        <span class="w3-right w3-opacity">Last rent - {{ tool.last_rentered }}</span>
+        <h4>{{ tool.make }}, {{ tool.serialno }}</h4><br>
+        <hr class="w3-clear">
+        <img src="../../static/images/tools.jpeg" style="width:20%" class="w3-margin-bottom">
+        <p>{{ tool.desc }}</p>
+        <button type="button" class="w3-button w3-green w3-margin-bottom"><i class="fa fa-exchange"></i>  Rents</button> 
+        <button type="button" class="w3-button w3-green w3-margin-bottom"><i class="fa fa-edit"></i>  Edit</button> 
+        <button type="button" class="w3-button w3-red w3-margin-bottom"><i class="fa fa-remove"></i>  Remove</button> 
+      </div>
+
+{% endfor %}
+
+</div> 
+
+</div>
 <!-- Footer -->
   <footer class="w3-container w3-padding-16 w3-light-grey">
     <h4>FOOTER</h4>

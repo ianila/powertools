@@ -34,8 +34,9 @@ def controlpanel_home(request):
 
 @login_required
 def controlpanel_tools(request):
+    tools = Tool.objects.all()
     details = {'tools': 'w3-blue'}
-    return render(request, 'controlpanel/tools.html', {'details': details})
+    return render(request, 'controlpanel/tools.html', {'details': details, 'tools': tools})
 
 @login_required
 def controlpanel_logout(request):
