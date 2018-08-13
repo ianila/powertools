@@ -23,5 +23,7 @@ urlpatterns = [
     url(r'^controlpanel/logout/', controlpanel_views.controlpanel_logout, name='controlpanel_logout'),
     url(r'^controlpanel/home/', controlpanel_views.controlpanel_home, name='controlpanel_home'),
     url(r'^controlpanel/tools/', controlpanel_views.controlpanel_tools, name='controlpanel_tools'),
+    url(r'^controlpanel/edittools/', controlpanel_views.edit_tools, name='edittools'),
+    url(r'^controlpanel/updatetools/', controlpanel_views.update_tools, name='updatetools'),
     url(r'^admin/', admin.site.urls),
 ]
