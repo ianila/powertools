@@ -50,6 +50,19 @@ def controlpanel_logout(request):
     return redirect('controlpanel_login')
 
 @login_required
+def new_tools(request):
+    if request.method == 'POST':        
+        form = ToolEditForm(request.POST)        
+        if form.is_valid():
+            tool = Tool.objects.create(
+                serialno = form.cleaned_data.get('serialno'),
+                make = form.cleaned_data.get('make'),
+                rentalvalue = form.cleaned_data.get('rentalvalue'),
+                desc = form.cleaned_data.get('desc'),
+            )
+            return redirect('controlpanel_tools')
+
+@login_required
 def edit_tools(request):
     tool = Tool.objects.get(pk=request.GET.get('pk'))
     data = { 'pk':tool.pk, 'serialno':tool.serialno, 'make':tool.make, 'rentalvalue':tool.rentalvalue, 'desc':tool.desc }
