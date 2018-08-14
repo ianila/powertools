@@ -51,12 +51,14 @@ def controlpanel_logout(request):
 
 @login_required
 def edit_tools(request):
-    tools = list(Tool.objects.values())
-    return JsonResponse(tools, safe=False)
+    tool = Tool.objects.get(pk=request.GET.get('pk'))
+    data = { 'pk':tool.pk, 'serialno':tool.serialno, 'make':tool.make, 'rentalvalue':tool.rentalvalue, 'desc':tool.desc }
+    return JsonResponse(data, safe=False)
 
 @login_required
 def update_tools(request):
-    tool = Tool.objects.get(serialno=request.POST.get('serialno'))
+    print(request.POST.get('pk'))
+    tool = Tool.objects.get(pk=request.POST.get('pk'))
     tool.serialno = request.POST.get('serialno')
     tool.make = request.POST.get('make')
     tool.rentalvalue = request.POST.get('rentalvalue')

@@ -42,8 +42,11 @@
         <hr class="w3-clear">
         <form class="w3-container" action="{% url 'updatetools' %}" method="post">
             {% csrf_token %}
-            {{ editform }}
-        
+            <table class="w3-table">
+                {{ editform }}
+            </table>
+    
+            <input type="hidden" value="" id="pk" name="pk">
               <footer class="w3-margin-top">
                 <button type="submit" class="w3-button w3-green w3-margin-bottom"><i class="fa fa-edit"></i>  Save</button> 
                 <button type="button" class="w3-button w3-red w3-margin-bottom" onclick="document.getElementById('id01').style.display='none'" ><i class="fa fa-remove"></i>  Cancel</button> 
@@ -53,7 +56,6 @@
   </div>
 
 
-</div>
 <!-- Footer -->
   <footer class="w3-container w3-padding-16 w3-light-grey">
     <h4>FOOTER</h4>
@@ -72,21 +74,22 @@ var namecontainer = document.getElementById('toolname');
 function modalFunction(t) {    
     var editRequest = new XMLHttpRequest();
 
-    editRequest.open('GET', "/controlpanel/edittools/");
+    editRequest.open('GET', "/controlpanel/edittools/?pk=" + t);
     editRequest.onload = function(){
         var editData = JSON.parse(editRequest.responseText);
-        renderEdit(editData, t);
+        renderEdit(editData);
     };
     editRequest.send();   
 }
 
-function renderEdit(data, t){
-    namecontainer.innerHTML = 'Edit ' + data[t-1].make + ", " +data[t-1].serialno;
+function renderEdit(data){
+    namecontainer.innerHTML = 'Edit ' + data.make + ", " +data.serialno;
     
-    document.getElementById('sn').value = data[t-1].serialno
-    document.getElementById('mk').value = data[t-1].make
-    document.getElementById('rv').value = data[t-1].rentalvalue
-    document.getElementById('dc').value = data[t-1].desc
+    document.getElementById('sn').value = data.serialno
+    document.getElementById('mk').value = data.make
+    document.getElementById('rv').value = data.rentalvalue
+    document.getElementById('dc').value = data.desc
+    document.getElementById('pk').value = data.pk
 
     document.getElementById('id01').style.display='block';
 }
