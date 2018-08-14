@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from tools.models import Tool
 from users.models import Profile
 
-from .forms import ToolEditForm
+from .forms import ToolEditForm, ToolNewForm
 
 def controlpanel_login(request, template_name='controlpanel/login.html'):
     if request.method == 'POST': 
@@ -41,8 +41,9 @@ def controlpanel_tools(request):
     tools = Tool.objects.all()
     details = {'tools': 'w3-blue'}
 
+    newform = ToolNewForm()
     editform = ToolEditForm()
-    return render(request, 'controlpanel/tools.html', {'details': details, 'tools': tools, 'editform': editform})
+    return render(request, 'controlpanel/tools.html', {'details': details, 'tools': tools, 'editform': editform, 'newform': newform})
 
 @login_required
 def controlpanel_logout(request):
@@ -52,7 +53,7 @@ def controlpanel_logout(request):
 @login_required
 def new_tools(request):
     if request.method == 'POST':        
-        form = ToolEditForm(request.POST)        
+        form = ToolNewForm(request.POST)        
         if form.is_valid():
             tool = Tool.objects.create(
                 serialno = form.cleaned_data.get('serialno'),
