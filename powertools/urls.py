@@ -25,5 +25,6 @@ urlpatterns = [
     url(r'^controlpanel/tools/', controlpanel_views.controlpanel_tools, name='controlpanel_tools'),
     url(r'^controlpanel/edittools/', controlpanel_views.edit_tools, name='edittools'),
     url(r'^controlpanel/updatetools/', controlpanel_views.update_tools, name='updatetools'),
+    url(r'^controlpanel/deletetools/', controlpanel_views.delete_tools, name='deletetools'),
     url(r'^admin/', admin.site.urls),
 ]

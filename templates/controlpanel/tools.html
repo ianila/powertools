@@ -23,7 +23,7 @@
         <p>{{ tool.rentalvalue }}</p>
         <button type="button" class="w3-button w3-green w3-margin-bottom"><i class="fa fa-exchange"></i>  Rents</button> 
         <button type="button" class="w3-button w3-green w3-margin-bottom" onclick="modalFunction({{ tool.pk }})"><i class="fa fa-edit"></i>  Edit</button> 
-        <button type="button" class="w3-button w3-red w3-margin-bottom"><i class="fa fa-remove"></i>  Remove</button> 
+        <button type="button" class="w3-button w3-red w3-margin-bottom" onclick="deleteFunction({{ tool.pk }})"><i class="fa fa-remove"></i>  Remove</button> 
       </div>
 
 {% endfor %}
@@ -48,8 +48,31 @@
     
             <input type="hidden" value="" id="pk" name="pk">
               <footer class="w3-margin-top">
-                <button type="submit" class="w3-button w3-green w3-margin-bottom"><i class="fa fa-edit"></i>  Save</button> 
-                <button type="button" class="w3-button w3-red w3-margin-bottom" onclick="document.getElementById('id01').style.display='none'" ><i class="fa fa-remove"></i>  Cancel</button> 
+                <button type="submit" class="w3-button w3-blue w3-margin-bottom"><i class="fa fa-edit"></i>  Save</button> 
+                <button type="button" class="w3-button w3-green w3-margin-bottom" onclick="document.getElementById('id01').style.display='none'" ><i class="fa fa-remove"></i>  Cancel</button> 
+              </footer>
+        </form>
+    </div>
+  </div>
+
+<!-- modal for delete -->
+
+  <div id="dm" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-round">
+      <header class="w3-container"> 
+        <span onclick="document.getElementById('dm').style.display='none'" 
+        class="w3-button w3-display-topright w3-round">&times;</span>
+        <h2 id="deletetoolname">Modal Header</h2>
+      </header>
+        <hr class="w3-clear">
+        <form class="w3-container" action="{% url 'deletetools' %}" method="post">
+            {% csrf_token %}
+            <p>Are you sure?</p>
+    
+            <input type="hidden" value="" id="dmpk" name="pk">
+              <footer class="w3-margin-top">
+                <button type="submit" class="w3-button w3-red w3-margin-bottom"><i class="fa fa-edit"></i>  Remove</button> 
+                <button type="button" class="w3-button w3-green w3-margin-bottom" onclick="document.getElementById('dm').style.display='none'" ><i class="fa fa-remove"></i>  Cancel</button> 
               </footer>
         </form>
     </div>
@@ -93,6 +116,28 @@ function renderEdit(data){
 
     document.getElementById('id01').style.display='block';
 }
+
+var deletenamecontainer = document.getElementById('deletetoolname');
+
+function deleteFunction(t) {    
+    var editRequest = new XMLHttpRequest();
+
+    editRequest.open('GET', "/controlpanel/edittools/?pk=" + t);
+    editRequest.onload = function(){
+        var deleteData = JSON.parse(editRequest.responseText);
+        renderDelete(deleteData);
+    };
+    editRequest.send();   
+}
+
+function renderDelete(data){
+    deletenamecontainer.innerHTML = 'Delete ' + data.make + ", " +data.serialno;
+    
+    document.getElementById('dmpk').value = data.pk
+
+    document.getElementById('dm').style.display='block';
+}
+
 </script>
 {% endblock %}
 

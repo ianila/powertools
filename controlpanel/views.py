@@ -66,3 +66,11 @@ def update_tools(request):
     tool.save()
     
     return redirect('controlpanel_tools')
+
+@login_required
+def delete_tools(request):
+    print(request.POST.get('pk'))
+    Tool.objects.get(pk=request.POST.get('pk')).delete()
+       
+    return redirect('controlpanel_tools')
+
