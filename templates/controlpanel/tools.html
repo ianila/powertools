@@ -16,28 +16,32 @@
 {% for tool in tools %}
 
     <div class="w3-container w3-card w3-white w3-round w3-margin-bottom"><br>
-        <img src="../../static/icons/tools.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">        
+        <img src="../../static/icons/tools.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
         <h4>{{ tool.make }}, {{ tool.serialno }}</h4>
-        <div class="w3-left w3-opacity">Last rent - {{ tool.last_rentered }}</div><br>
+        {% if tool.last_rentered %}
+            <div class="w3-left w3-opacity">Last rent - {{ tool.last_rentered }}</div><br>
+        {% else %}
+            <div class="w3-left w3-opacity">Last rent - Not Rentered yet</div><br>
+        {% endif %}
         <hr class="w3-clear">
         <img src="../../static/images/tools.jpeg" style="width:20%" class="w3-margin-bottom">
         <p>{{ tool.desc }}</p>
         <p>{{ tool.rentalvalue }}</p>
-        <button type="button" class="w3-button w3-green w3-margin-bottom"><i class="fa fa-exchange"></i>  Rents</button> 
-        <button type="button" class="w3-button w3-green w3-margin-bottom" onclick="modalFunction({{ tool.pk }})"><i class="fa fa-edit"></i>  Edit</button> 
-        <button type="button" class="w3-button w3-red w3-margin-bottom" onclick="deleteFunction({{ tool.pk }})"><i class="fa fa-remove"></i>  Remove</button> 
+        <button type="button" class="w3-button w3-green w3-margin-bottom"><i class="fa fa-exchange"></i>  Rents</button>
+        <button type="button" class="w3-button w3-green w3-margin-bottom" onclick="modalFunction({{ tool.pk }})"><i class="fa fa-edit"></i>  Edit</button>
+        <button type="button" class="w3-button w3-red w3-margin-bottom" onclick="deleteFunction({{ tool.pk }})"><i class="fa fa-remove"></i>  Remove</button>
       </div>
 
 {% endfor %}
 
-</div> 
+</div>
 
 <!-- modal for new -->
 
   <div id="nm" class="w3-modal">
     <div class="w3-modal-content w3-card-4 w3-round">
-      <header class="w3-container"> 
-        <span onclick="document.getElementById('nm').style.display='none'" 
+      <header class="w3-container">
+        <span onclick="document.getElementById('nm').style.display='none'"
         class="w3-button w3-display-topright w3-round">&times;</span>
         <h2>Create new Tool</h2>
       </header>
@@ -47,11 +51,11 @@
             <table class="w3-table">
                 {{ newform }}
             </table>
-    
+
               <footer class="w3-margin-top">
                 <button type="submit" class="w3-button w3-blue w3-margin-bottom"><i class="fa fa-edit"></i>  Create</button>
                 <button type="reset" class="w3-button w3-orange w3-margin-bottom"><i class="fa fa-edit"></i>  Clear</button>
-                <button type="button" class="w3-button w3-green w3-margin-bottom" onclick="document.getElementById('nm').style.display='none'" ><i class="fa fa-remove"></i>  Cancel</button> 
+                <button type="button" class="w3-button w3-green w3-margin-bottom" onclick="document.getElementById('nm').style.display='none'" ><i class="fa fa-remove"></i>  Cancel</button>
               </footer>
         </form>
     </div>
@@ -61,8 +65,8 @@
 
   <div id="id01" class="w3-modal">
     <div class="w3-modal-content w3-card-4 w3-round">
-      <header class="w3-container"> 
-        <span onclick="document.getElementById('id01').style.display='none'" 
+      <header class="w3-container">
+        <span onclick="document.getElementById('id01').style.display='none'"
         class="w3-button w3-display-topright w3-round">&times;</span>
         <h2 id="toolname">Modal Header</h2>
       </header>
@@ -72,11 +76,11 @@
             <table class="w3-table">
                 {{ editform }}
             </table>
-    
+
             <input type="hidden" value="" id="pk" name="pk">
               <footer class="w3-margin-top">
-                <button type="submit" class="w3-button w3-blue w3-margin-bottom"><i class="fa fa-edit"></i>  Save</button> 
-                <button type="button" class="w3-button w3-green w3-margin-bottom" onclick="document.getElementById('id01').style.display='none'" ><i class="fa fa-remove"></i>  Cancel</button> 
+                <button type="submit" class="w3-button w3-blue w3-margin-bottom"><i class="fa fa-edit"></i>  Save</button>
+                <button type="button" class="w3-button w3-green w3-margin-bottom" onclick="document.getElementById('id01').style.display='none'" ><i class="fa fa-remove"></i>  Cancel</button>
               </footer>
         </form>
     </div>
@@ -86,8 +90,8 @@
 
   <div id="dm" class="w3-modal">
     <div class="w3-modal-content w3-card-4 w3-round">
-      <header class="w3-container"> 
-        <span onclick="document.getElementById('dm').style.display='none'" 
+      <header class="w3-container">
+        <span onclick="document.getElementById('dm').style.display='none'"
         class="w3-button w3-display-topright w3-round">&times;</span>
         <h2 id="deletetoolname">Modal Header</h2>
       </header>
@@ -95,11 +99,11 @@
         <form class="w3-container" action="{% url 'deletetools' %}" method="post">
             {% csrf_token %}
             <p>Are you sure?</p>
-    
+
             <input type="hidden" value="" id="dmpk" name="pk">
               <footer class="w3-margin-top">
-                <button type="submit" class="w3-button w3-red w3-margin-bottom"><i class="fa fa-edit"></i>  Remove</button> 
-                <button type="button" class="w3-button w3-green w3-margin-bottom" onclick="document.getElementById('dm').style.display='none'" ><i class="fa fa-remove"></i>  Cancel</button> 
+                <button type="submit" class="w3-button w3-red w3-margin-bottom"><i class="fa fa-edit"></i>  Remove</button>
+                <button type="button" class="w3-button w3-green w3-margin-bottom" onclick="document.getElementById('dm').style.display='none'" ><i class="fa fa-remove"></i>  Cancel</button>
               </footer>
         </form>
     </div>
@@ -121,7 +125,7 @@
 
 var namecontainer = document.getElementById('toolname');
 
-function modalFunction(t) {    
+function modalFunction(t) {
     var editRequest = new XMLHttpRequest();
 
     editRequest.open('GET', "/controlpanel/edittools/?pk=" + t);
@@ -129,12 +133,12 @@ function modalFunction(t) {
         var editData = JSON.parse(editRequest.responseText);
         renderEdit(editData);
     };
-    editRequest.send();   
+    editRequest.send();
 }
 
 function renderEdit(data){
     namecontainer.innerHTML = 'Edit ' + data.make + ", " +data.serialno;
-    
+
     document.getElementById('sn').value = data.serialno
     document.getElementById('mk').value = data.make
     document.getElementById('rv').value = data.rentalvalue
@@ -146,7 +150,7 @@ function renderEdit(data){
 
 var deletenamecontainer = document.getElementById('deletetoolname');
 
-function deleteFunction(t) {    
+function deleteFunction(t) {
     var editRequest = new XMLHttpRequest();
 
     editRequest.open('GET', "/controlpanel/edittools/?pk=" + t);
@@ -154,12 +158,12 @@ function deleteFunction(t) {
         var deleteData = JSON.parse(editRequest.responseText);
         renderDelete(deleteData);
     };
-    editRequest.send();   
+    editRequest.send();
 }
 
 function renderDelete(data){
     deletenamecontainer.innerHTML = 'Delete ' + data.make + ", " +data.serialno;
-    
+
     document.getElementById('dmpk').value = data.pk
 
     document.getElementById('dm').style.display='block';

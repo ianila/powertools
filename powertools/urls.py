@@ -20,7 +20,6 @@ from web import views as web_views
 from controlpanel import views as controlpanel_views
 
 urlpatterns = [
-    url(r'^', web_views.home, name='web_home'),
     url(r'^controlpanel/login/', controlpanel_views.controlpanel_login, name='controlpanel_login'),
     url(r'^controlpanel/logout/', controlpanel_views.controlpanel_logout, name='controlpanel_logout'),
     url(r'^controlpanel/home/', controlpanel_views.controlpanel_home, name='controlpanel_home'),
@@ -30,4 +29,5 @@ urlpatterns = [
     url(r'^controlpanel/updatetools/', controlpanel_views.update_tools, name='updatetools'),
     url(r'^controlpanel/deletetools/', controlpanel_views.delete_tools, name='deletetools'),
     url(r'^admin/', admin.site.urls),
+    url(r'^/$', web_views.home, name='web_home'),
 ]
