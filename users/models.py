@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 class Profile(models.Model):
     ROLE_CHOICES = (
@@ -17,5 +19,8 @@ class Profile(models.Model):
     homephone = models.CharField(max_length=10, blank=True)
     role = models.CharField(choices=ROLE_CHOICES, max_length=10, null=True, blank=True)
 
-    def __str__(self):
-        return self.user.profile.fullname
+@receiver(post_save, sender=User)
+def update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+    instance.profile.save()

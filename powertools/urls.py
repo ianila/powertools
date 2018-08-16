@@ -18,6 +18,7 @@ from django.contrib import admin
 
 from web import views as web_views
 from controlpanel import views as controlpanel_views
+from users import views as users_views
 
 urlpatterns = [
     url(r'^controlpanel/login/', controlpanel_views.controlpanel_login, name='controlpanel_login'),
@@ -29,5 +30,6 @@ urlpatterns = [
     url(r'^controlpanel/updatetools/', controlpanel_views.update_tools, name='updatetools'),
     url(r'^controlpanel/deletetools/', controlpanel_views.delete_tools, name='deletetools'),
     url(r'^admin/', admin.site.urls),
+    url(r'^signup/', users_views.signup, name='users_signup'),
     url(r'^$', web_views.home, name='web_home'),
 ]
