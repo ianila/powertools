@@ -31,5 +31,6 @@ urlpatterns = [
     url(r'^controlpanel/deletetools/', controlpanel_views.delete_tools, name='deletetools'),
     url(r'^admin/', admin.site.urls),
     url(r'^signup/', users_views.signup, name='users_signup'),
+    url(r'^tools/', web_views.tools, name='web_tools'),
     url(r'^$', web_views.home, name='web_home'),
 ]

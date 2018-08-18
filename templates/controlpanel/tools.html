@@ -26,7 +26,7 @@
         <hr class="w3-clear">
         <img src="../../static/images/tools.jpeg" style="width:20%" class="w3-margin-bottom">
         <p>{{ tool.desc }}</p>
-        <p>{{ tool.rentalvalue }}</p>
+        <p>Rental value - LKR {{ tool.rentalvalue }}</p>
         <button type="button" class="w3-button w3-green w3-margin-bottom"><i class="fa fa-exchange"></i>  Rents</button>
         <button type="button" class="w3-button w3-green w3-margin-bottom" onclick="modalFunction({{ tool.pk }})"><i class="fa fa-edit"></i>  Edit</button>
         <button type="button" class="w3-button w3-red w3-margin-bottom" onclick="deleteFunction({{ tool.pk }})"><i class="fa fa-remove"></i>  Remove</button>
