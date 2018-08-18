@@ -1,17 +1,33 @@
-<h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {% for field in form %}
-      <p>
-        {{ field.label_tag }}<br>
-        {{ field }}
-        {% if field.help_text %}
-          <small style="color: grey">{{ field.help_text }}</small>
-        {% endif %}
-        {% for error in field.errors %}
-          <p style="color: red">{{ error }}</p>
-        {% endfor %}
-      </p>
-    {% endfor %}
-    <button type="submit">Sign up</button>
-</form>
+{% extends 'base.html' %}
+
+{% block title %}
+  Power Tools Project - Customer Signup
+{% endblock %}
+
+{% block content %}
+<div class=" w3-card-4" style="width:30%;margin:0 auto;">
+        <div class="w3-center">
+            <h2 class="w3-panel w3-teal w3-border-bottom w3-padding-16">Customer Signup</h2>
+
+            {% if error %}
+                <h4 class="w3-text-red">{{ error }}</h4>
+            {% endif %}
+            <img src="../../static/icons/avatar.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+        </div>   
+
+    <form class="w3-container" method="post">
+        {% csrf_token %}
+            <label><b>Username</b></label>
+            <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="username" required autofocus>
+            <label><b>Birthdate (YYYY-MM-DD)</b></label>
+            <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Birthdate (YYYY-MM-DD)" name="birthdate" required>
+            <label><b>Password</b></label>
+            <input class="w3-input w3-border w3-margin-bottom" type="password" placeholder="Enter Password" name="password1" required>
+            <label><b>Confirm Password</b></label>
+            <input class="w3-input w3-border w3-margin-bottom" type="password" placeholder="Re Enter the Password" name="password2" required>
+
+        <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Sign up</button>
+    </form>
+</div>
+
+{% endblock %}
